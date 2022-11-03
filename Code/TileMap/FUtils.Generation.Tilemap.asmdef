@@ -1,0 +1,17 @@
+{
+    "name": "FUtils.Generation.Tilemap",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ff3e6099a8f516d408617d25671930e2",
+        "GUID:21e7ea775047cfc4c87f6e1757835245"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

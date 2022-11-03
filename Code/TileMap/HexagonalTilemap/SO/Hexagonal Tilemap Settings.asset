@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45340630fdeae5499e1e2a67528dca7, type: 3}
+  m_Name: Hexagonal Tilemap Settings
+  m_EditorClassIdentifier: 
+  _seed: 2
+  _mapSize: 25
+  _noiseLayers:
+  - _enabled: 0
+    _usePreviousAsMask: 0
+    _noiseSettings: {fileID: 11400000, guid: 8cd4fc82d303dc546b6b9d33385d7dce, type: 2}
+  - _enabled: 1
+    _usePreviousAsMask: 1
+    _noiseSettings: {fileID: 11400000, guid: 4aaae4f690a55364fadd7ad866700270, type: 2}
+  _locationDistribution:
+    serializedVersion: 2
+    key0: {r: 0.6862745, g: 0.854902, b: 0.77647066, a: 1}
+    key1: {r: 1, g: 0.90817785, b: 0.514151, a: 1}
+    key2: {r: 0.93725497, g: 0.7176471, b: 0.27450982, a: 0}
+    key3: {r: 0.81568635, g: 0.7843138, b: 0.30588236, a: 0}
+    key4: {r: 0.6792453, g: 0.63552165, b: 0.4261303, a: 0}
+    key5: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0}
+    key6: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 7710
+    ctime1: 10794
+    ctime2: 14649
+    ctime3: 22359
+    ctime4: 30069
+    ctime5: 38550
+    ctime6: 38550
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  _basicTile: {fileID: 4972219967589939912, guid: 479cf18207fb25447bac9bcf2bb0e905, type: 3}
+  _outerTileRadius: 1
+  _tileBevel: 0.025
+  _tileHeightStep: 0.3

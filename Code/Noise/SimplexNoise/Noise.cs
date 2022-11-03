@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace FluidiousUtils.Generation.NoiseMath
 {
-    public static class Noise
+    static class Noise
     {
         //> NOISE TYPES
         public enum Type { Simple, Rigid, Brownian };

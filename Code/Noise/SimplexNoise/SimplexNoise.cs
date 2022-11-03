@@ -2,7 +2,7 @@
 
 namespace FluidiousUtils.Generation.NoiseMath
 {
-    public class SimplexNoise
+    class SimplexNoise
     {
         private static readonly int[] Source =
         {

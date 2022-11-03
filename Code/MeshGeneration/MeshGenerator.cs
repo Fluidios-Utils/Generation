@@ -1,14 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace FluidiousUtils.Generation
+namespace FluidiousUtils.Generation.Meshes
 {
     public static class MeshGenerator
     {
-        public static Mesh NgonShape(int N, float radius, float height, float bevel, Color vertexColor, string customMeshName = null, BevelType bevelType = BevelType.AllEdges, ShapeType shapeType = ShapeType.Normal)
+        public static Mesh NgonShape(int N, float radius, float height, float bevel, float angle, Color vertexColor, string customMeshName = null, BevelType bevelType = BevelType.AllEdges, ShapeType shapeType = ShapeType.Normal)
         {
             Mesh mesh = new Mesh();
             mesh.name = customMeshName != null ? customMeshName : string.Format("Runtime{0}Gon", N);
@@ -22,10 +19,10 @@ namespace FluidiousUtils.Generation
             switch (bevelType)
             {
                 case BevelType.AllEdges:
-                    topWall = GetNGon(Vector3.up * (height / 2), N, radius, bevel);
-                    bottomWall = GetNGon(Vector3.down * (height / 2), N, radius, bevel);
-                    top = GetNGon(Vector3.up * (height / 2 + bevel), N, radius - bevel, 0);
-                    bottom = GetNGon(Vector3.down * (height / 2 + bevel), N, radius - bevel, 0);
+                    topWall = GetNGon(Vector3.up * (height / 2), N, radius, bevel, angle);
+                    bottomWall = GetNGon(Vector3.down * (height / 2), N, radius, bevel, angle);
+                    top = GetNGon(Vector3.up * (height / 2 + bevel), N, radius - bevel, 0, angle);
+                    bottom = GetNGon(Vector3.down * (height / 2 + bevel), N, radius - bevel, 0, angle);
 
                     FillTopNGon(top, vertexColor, vertices, triangles, colors);
                     MergeToRing(topWall, top.Length, N, vertexColor, vertices, triangles, colors);
@@ -37,18 +34,18 @@ namespace FluidiousUtils.Generation
                     }
                     break;
                 case BevelType.OnlySideEdges:
-                    topWall = GetNGon(Vector3.up * (height / 2), N, radius, bevel);
-                    bottomWall = GetNGon(Vector3.down * (height / 2), N, radius, bevel);
+                    topWall = GetNGon(Vector3.up * (height / 2), N, radius, bevel, angle);
+                    bottomWall = GetNGon(Vector3.down * (height / 2), N, radius, bevel, angle);
 
                     FillTopNGon(topWall, vertexColor, vertices, triangles, colors);
                     MergeToRing(bottomWall, topWall.Length, N, vertexColor, vertices, triangles, colors);
                     if(shapeType != ShapeType.WithoutBottomSide) FillBottomNGon(bottomWall, vertices.Count, triangles);
                     break;
                 case BevelType.OnlyTopEdges:
-                    topWall = GetNGon(Vector3.up * (height / 2), N, radius, 0);
-                    bottomWall = GetNGon(Vector3.down * (height / 2), N, radius, 0);
-                    top = GetNGon(Vector3.up * (height / 2 + bevel), N, radius - bevel, 0);
-                    bottom = GetNGon(Vector3.down * (height / 2 + bevel), N, radius - bevel, 0);
+                    topWall = GetNGon(Vector3.up * (height / 2), N, radius, 0, angle);
+                    bottomWall = GetNGon(Vector3.down * (height / 2), N, radius, 0, angle);
+                    top = GetNGon(Vector3.up * (height / 2 + bevel), N, radius - bevel, 0, angle);
+                    bottom = GetNGon(Vector3.down * (height / 2 + bevel), N, radius - bevel, 0, angle);
 
                     FillTopNGon(top, vertexColor, vertices, triangles, colors);
                     MergeToRing(topWall, top.Length, N, vertexColor, vertices, triangles, colors);
@@ -84,7 +81,7 @@ namespace FluidiousUtils.Generation
             colors.Add(color);
         }
 
-        public static Vector3[] GetNGon(Vector3 center, int N, float radius, float bevel)
+        public static Vector3[] GetNGon(Vector3 center, int N, float radius, float bevel, float angle = 0)
         {
             Vector3[] points = new Vector3[bevel > 0 ? N * 2 : N];
             float bevelOffset = Mathf.Asin(bevel);
@@ -94,19 +91,19 @@ namespace FluidiousUtils.Generation
             {
                 if (bevel > 0)
                 {
-                    fi = 360f / N * i * Mathf.Deg2Rad - bevelOffset;
+                    fi = (360f / N * i + angle) * Mathf.Deg2Rad - bevelOffset;
                     points[i * 2].x = center.x + radius * Mathf.Cos(fi);
                     points[i * 2].y = center.y;
                     points[i * 2].z = center.z + radius * Mathf.Sin(fi);
 
-                    fi = 360f / N * i * Mathf.Deg2Rad + bevelOffset;
+                    fi = (360f / N * i + angle) * Mathf.Deg2Rad + bevelOffset;
                     points[i * 2 + 1].x = center.x + radius * Mathf.Cos(fi);
                     points[i * 2 + 1].y = center.y;
                     points[i * 2 + 1].z = center.z + radius * Mathf.Sin(fi);
                 }
                 else
                 {
-                    fi = 360f / N * i * Mathf.Deg2Rad;
+                    fi = (360f / N * i + angle) * Mathf.Deg2Rad;
                     points[i].x = center.x + radius * Mathf.Cos(fi);
                     points[i].y = center.y;
                     points[i].z = center.z + radius * Mathf.Sin(fi);

@@ -13,6 +13,11 @@ namespace FluidiousUtils.Generation.NoiseMath
         public bool UsePreviousAsMask { get { return _usePreviousAsMask; } }
         [SerializeField] private ScriptableNoiseSettings _noiseSettings;
 
+        public void ResetNoise(int seed, Vector3 newOffset)
+        {
+            _noiseSettings.ResetNoise(seed, newOffset);
+        }
+
         public float CalculateAtPoint(Vector3 point)
         {
             return _noiseSettings.CalculateAtPoint(point);

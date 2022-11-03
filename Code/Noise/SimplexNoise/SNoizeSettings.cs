@@ -11,5 +11,14 @@ namespace FluidiousUtils.Generation.NoiseMath
         {
             return Noise.GenerateValue(_layers, point);
         }
+
+        public override void ResetNoise(int seed, Vector3 newOffset)
+        {
+            foreach (var item in _layers)
+            {
+                item.generator = new SimplexNoise(seed);
+                item.offset = newOffset;
+            }
+        }
     }
 }

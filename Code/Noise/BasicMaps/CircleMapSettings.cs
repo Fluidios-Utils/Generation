@@ -18,5 +18,10 @@ namespace FluidiousUtils.Generation.NoiseMath
             float value = distance > _radius ? (Mathf.Lerp(0, 1, (_radius + _blend - distance)/_blend)) : 1;
             return _invert ? (1 - value) : value;
         }
+
+        public override void ResetNoise(int seed, Vector3 newOffset)
+        {
+            _center = newOffset;
+        }
     }
 }
